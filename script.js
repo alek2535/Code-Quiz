@@ -9,7 +9,7 @@ let buttonB = document.getElementById("button-b");
 let buttonC = document.getElementById("button-c");
 let buttonD = document.getElementById("button-d");
 let btnAnswers = document.querySelector("button");
-let secondsLeft = 30;
+let secondsLeft = 75;
 let score = 0;
 let i = 0;
 let highScoreInput = document.getElementById("high-score-input");
@@ -184,7 +184,7 @@ buttonD.addEventListener('click', function(event) {
 let finalScore = "";
 
 function lastQuestion() {
-    if (secondsLeft === 0 || i === questionsAnswers[5].answer) { 
+    if (secondsLeft === 0 || i === 4) { 
     finalScore = secondsLeft + score; 
     questionBlock.className = "d-none";
     highScoreInput.className = "container text-center mt-5";
@@ -195,7 +195,7 @@ function lastQuestion() {
 let scoresPage = document.getElementById("scores-page");
 let addName = document.getElementById("button-addon2");
 
-addName.addEventListener("click", pageScores());
+// addName.addEventListener("click", pageScores());
 
 localStorage.setItem("score",JSON.stringify(finalScore));
 localStorage.setItem("name", JSON.stringify(yourName));
