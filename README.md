@@ -22,7 +22,7 @@ WHEN the game is over
 THEN I can save my initials and score
 ```
 
-### Visuals 
+## Visuals 
 
 ![code quiz](./Assets/04-web-apis-homework-demo.gif) -->
 
