@@ -9,7 +9,7 @@ let buttonB = document.getElementById("button-b");
 let buttonC = document.getElementById("button-c");
 let buttonD = document.getElementById("button-d");
 let btnAnswers = document.querySelector("button");
-let secondsLeft = 75;
+let secondsLeft = 45;
 let score = 0;
 let i = 0;
 let highScoreInput = document.getElementById("high-score-input");
@@ -59,7 +59,7 @@ function setTimer() {
         secondsLeft--;
         timerClock.innerHTML = `Timer: ${secondsLeft}`;
 
-        if (secondsLeft === 0) {
+        if (secondsLeft <= 0 || i <= questionsAnswers.length.choices) {
             clearInterval(countdown);
             lastQuestion();
         }
