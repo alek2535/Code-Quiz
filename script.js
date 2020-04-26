@@ -184,12 +184,10 @@ buttonD.addEventListener('click', function(event) {
 let finalScore = "";
 
 function lastQuestion() {
-    if (secondsLeft === 0 || i === 4) { 
     finalScore = secondsLeft + score; 
     questionBlock.className = "d-none";
     highScoreInput.className = "container text-center mt-5";
     yourScore.innerHTML = `Your score is ${finalScore}!`;
-    }
 }
 
 let scoresPage = document.getElementById("scores-page");
