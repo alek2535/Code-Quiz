@@ -10,7 +10,7 @@
     <!-- Navbar with viewscore and timer -->
     <header>
         <nav class="navbar navbar-expand-xs navbar-light bg-light">
-        <a class="navbar-brand text-primary" href="#">View Highscores</a>
+        <a id="highscores-page" class="navbar-brand text-primary" href="#">View Highscores</a>
         <span id="timer-clock" class="text-right">
         Timer:
         </span>
@@ -22,7 +22,7 @@
         <p>Welcome to the Coding Quiz Challenge! You will have 75 seconds to answer some questions about coding. When you are finished, a score will be given to you based on the time you finished and the number of questions you answered correctly. Have fun and click the button below when you're ready!</p>
         <button type="button" class="btn btn-primary" id="start-button">Start Quiz</button>
     </div>
-    <!-- Div with question-1 -->
+    <!-- Div for questions -->
     <div class="d-none" id="question-block">
         <h1 id="question-h1"></h1>
         <ul class="list-group">
@@ -38,6 +38,23 @@
             <li class="list-group-item btn-answers">
                 <button type="button" class="btn btn-primary" id="button-d">D) Value Pair</button>
             </li>
+        </ul>
+    </div>
+    <!-- High scores input page -->
+    <div class="d-none" id="high-score-input">
+        <h1>All Done!</h1>
+        <h4 id="your-score"></h4>
+        <div class="input-group mb-3">
+            <input id="your-name" type="text" class="form-control" placeholder="Your name" aria-label="Your name" aria-describedby="button-addon2">
+            <div class="input-group-append">
+              <button class="btn btn-primary" type="button" id="button-addon2">Add Name</button>
+            </div>
+          </div>
+    </div>
+    <!-- Scores Page -->
+    <div class="d-none" id="scores-page">
+        <h1>High Scores</h1>
+        <ul id="final-ul" class="list-group">
         </ul>
     </div>
 

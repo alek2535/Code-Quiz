@@ -8,10 +8,14 @@ let buttonA = document.getElementById("button-a");
 let buttonB = document.getElementById("button-b");
 let buttonC = document.getElementById("button-c");
 let buttonD = document.getElementById("button-d");
-let btnAnswers = document.querySelector(".btn-answers");
-let secondsLeft = 75;
+let btnAnswers = document.querySelector("button");
+let secondsLeft = 30;
 let score = 0;
 let i = 0;
+let highScoreInput = document.getElementById("high-score-input");
+let yourName = document.getElementById("your-name");
+let yourScore = document.getElementById("your-score");
+let highScoresPage = document.getElementById("highscores-page");
 
 //Array for Questions and Answers
 let questionsAnswers = [
@@ -42,6 +46,13 @@ let questionsAnswers = [
     }  
 ];
 
+// Highscores page 
+highScoresPage.addEventListener("click", function() {
+    startPage.className = 'd-none';
+    questionBlock.className = "d-none";
+    scoresPage.className = "container text-center mt-5";
+})
+
 //Timer
 function setTimer() {
     let countdown = setInterval(() => {
@@ -50,6 +61,7 @@ function setTimer() {
 
         if (secondsLeft === 0) {
             clearInterval(countdown);
+            lastQuestion();
         }
     }, 1000);
 };
@@ -70,7 +82,7 @@ function printQuestionsAnswers() {
     buttonD.textContent = questionsAnswers[i].choices[3];
 };
 
-
+// Buttons Click Events
 buttonA.addEventListener('click', function(event) {
     event.stopPropagation();
     let correctChoice = "";
@@ -82,10 +94,15 @@ buttonA.addEventListener('click', function(event) {
     if (event.target.textContent === correctChoice) {  
         printQuestionsAnswers();
         score++;
-        
+        let newP = document.createElement("p");
+        newP.textContent = "Correct!";
+        questionBlock.appendChild(newP);
     } else {
         printQuestionsAnswers();
         secondsLeft -= 5;
+        let newP = document.createElement("p");
+        newP.textContent = "Incorrect!";
+        questionBlock.appendChild(newP);
     }
     console.log(score);
     
@@ -102,10 +119,15 @@ buttonB.addEventListener('click', function(event) {
     if (event.target.textContent === correctChoice) { 
         printQuestionsAnswers();
         score++;
-        
+        let newP = document.createElement("p");
+        newP.textContent = "Correct!";
+        questionBlock.appendChild(newP);
     } else {
         printQuestionsAnswers();
         secondsLeft -= 5;
+        let newP = document.createElement("p");
+        newP.textContent = "Incorrect!";
+        questionBlock.appendChild(newP);
     }
     console.log(score);
 });
@@ -121,10 +143,15 @@ buttonC.addEventListener('click', function(event) {
     if (event.target.textContent === correctChoice) { 
         printQuestionsAnswers();
         score++;
-        
+        let newP = document.createElement("p");
+        newP.textContent = "Correct!";
+        questionBlock.appendChild(newP);
     } else {
         printQuestionsAnswers();
         secondsLeft -= 5;
+        let newP = document.createElement("p");
+        newP.textContent = "Incorrect!";
+        questionBlock.appendChild(newP);
     }
     console.log(score);
 });
@@ -140,16 +167,47 @@ buttonD.addEventListener('click', function(event) {
     if (event.target.textContent === correctChoice) { 
         printQuestionsAnswers(); 
         score++;
+        let newP = document.createElement("p");
+        newP.textContent = "Correct!";
+        questionBlock.appendChild(newP);
     } else {
         printQuestionsAnswers();
         secondsLeft -= 5;
+        let newP = document.createElement("p");
+        newP.textContent = "Incorrect!";
+        questionBlock.appendChild(newP);
     }
     console.log(score); 
 });
 
+//Final Score input
+let finalScore = "";
 
-    // if (i < questionsAnswers.length -1) {
-    //     i++;
-    // } else {
+function lastQuestion() {
+    if (secondsLeft === 0 || i === questionsAnswers[5].answer) { 
+    finalScore = secondsLeft + score; 
+    questionBlock.className = "d-none";
+    highScoreInput.className = "container text-center mt-5";
+    yourScore.innerHTML = `Your score is ${finalScore}!`;
+    }
+}
 
-    // }
+let scoresPage = document.getElementById("scores-page");
+let addName = document.getElementById("button-addon2");
+
+addName.addEventListener("click", pageScores());
+
+localStorage.setItem("score",JSON.stringify(finalScore));
+localStorage.setItem("name", JSON.stringify(yourName));
+function pageScores() {
+    highScoreInput.className = "d-none";
+    scoresPage.className = "container text-center mt-5";
+    let newLi = document.createElement("li");
+    JSON.parse(localStorage.getItem(finalScore));
+    JSON.parse(localStorage.getItem(yourName));
+    newLi.className = "bg-primary text-white"
+    newLi.innerHTML = yourName + finalScore;
+    let ul = document.getElementById("final-ul");
+    ul.appendChild(newLi);
+}
+
