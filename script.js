@@ -18,27 +18,27 @@ let questionsAnswers = [
     {
         question: "What kind of variable contains more than one value?",
         choices: ["A) Object", "B) Array", "C) String", "D) Value Pair"],
-        answer: 1
+        answer: "A) Object"
     }, 
     {
         question: "Which of these is a function in JavaScript?",
         choices: ["A) var name = function() {};", "B) function name() {};", "C) () => {};", "D) All of the above"],
-        answer: 3
+        answer: "D) All of the above"
     },
     {
         question: "Which of these is a library for JavaScript?",
         choices: ["A) Node.js", "B) React.js", "C) jQuery", "D) All of the above"],
-        answer: 3
+        answer: "D) All of the above"
     }, 
     {
         question: "What keyword will not allow the variable to be reassigned or redeclared?",
         choices: ["A) var", "B) let", "C) const", "D) None of the above"],
-        answer: 1
+        answer: "C) const"
     },
     {
         question: "How do you select an element in DOM by its id?",
         choices: ["A) document.getElementById()", "B) document.getElementByClassName()", "C) document.getElementByTag()", "D) document.getElementByName()"],
-        answer: 0
+        answer: "A) document.getElementById()"
     }  
 ];
 
@@ -71,18 +71,85 @@ function printQuestionsAnswers() {
 };
 
 
-btnAnswers.addEventListener('click', function(event) {
-    i++;
-    if (event.target.value === questionsAnswers[i].answer) {  
+buttonA.addEventListener('click', function(event) {
+    event.stopPropagation();
+    let correctChoice = "";
+    correctChoice = questionsAnswers[i].answer;
+    console.log(correctChoice);
+    if (i < questionsAnswers.length -1) {
+        i++
+    }
+    if (event.target.textContent === correctChoice) {  
         printQuestionsAnswers();
         score++;
-        console.log(score);
+        
     } else {
         printQuestionsAnswers();
+        secondsLeft -= 5;
     }
+    console.log(score);
+    
+});
+
+buttonB.addEventListener('click', function(event) {
+    event.stopPropagation();
+    let correctChoice = "";
+    correctChoice = questionsAnswers[i].answer;
+    console.log(correctChoice);
+    if (i < questionsAnswers.length -1) {
+        i++
+    }
+    if (event.target.textContent === correctChoice) { 
+        printQuestionsAnswers();
+        score++;
+        
+    } else {
+        printQuestionsAnswers();
+        secondsLeft -= 5;
+    }
+    console.log(score);
+});
+
+buttonC.addEventListener('click', function(event) {
+    event.stopPropagation();
+    let correctChoice = "";
+    correctChoice = questionsAnswers[i].answer;
+    console.log(correctChoice);
+    if (i < questionsAnswers.length -1) {
+        i++
+    }
+    if (event.target.textContent === correctChoice) { 
+        printQuestionsAnswers();
+        score++;
+        
+    } else {
+        printQuestionsAnswers();
+        secondsLeft -= 5;
+    }
+    console.log(score);
+});
+
+buttonD.addEventListener('click', function(event) {
+    event.stopPropagation();
+    let correctChoice = "";
+    correctChoice = questionsAnswers[i].answer;
+    console.log(correctChoice);
+    if (i < questionsAnswers.length -1) {
+        i++
+    }
+    if (event.target.textContent === correctChoice) { 
+        printQuestionsAnswers(); 
+        score++;
+    } else {
+        printQuestionsAnswers();
+        secondsLeft -= 5;
+    }
+    console.log(score); 
+});
+
+
     // if (i < questionsAnswers.length -1) {
     //     i++;
     // } else {
 
     // }
-});
