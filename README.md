@@ -6,7 +6,7 @@ WEEK-4 Web-API Code-Quiz HW
 
 The purpose of this project was to use some newly acquired JavaScript skills to create a coding quiz. Not only do you get to show off your new skills, but you also get to challenge yourself and others with a quiz about what you just learned. To complete this project there had to be a timer that counts down, with incorrect answers taking time away from the clock. This application must run in the browser and use JavaScript to dynamically update HTML and CSS of the application. As usual the application must be responsive and have a clean and neat user interface.
 
-### Logic for Building Generator
+### Logic for Building Quiz
 
 ```
 GIVEN I am taking a code quiz
