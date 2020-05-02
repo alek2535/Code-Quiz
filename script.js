@@ -9,13 +9,10 @@ let buttonB = document.getElementById("button-b");
 let buttonC = document.getElementById("button-c");
 let buttonD = document.getElementById("button-d");
 let btnAnswers = document.querySelector("button");
-let secondsLeft = 45;
+let secondsLeft = 75;
 let score = 0;
 let i = 0;
-let highScoreInput = document.getElementById("high-score-input");
-let yourName = document.getElementById("your-name");
-let yourScore = document.getElementById("your-score");
-let highScoresPage = document.getElementById("highscores-page");
+
 
 //Array for Questions and Answers
 let questionsAnswers = [
@@ -43,13 +40,22 @@ let questionsAnswers = [
         question: "How do you select an element in DOM by its id?",
         choices: ["A) document.getElementById()", "B) document.getElementByClassName()", "C) document.getElementByTag()", "D) document.getElementByName()"],
         answer: "A) document.getElementById()"
-    }  
+    } 
+    ,
+    {
+        question: "Good job! You completed the quiz!",
+        choices: ['', '', '', ''],
+        answers: ''
+    } 
 ];
 
-// Highscores page 
-highScoresPage.addEventListener("click", function() {
+// View Highscores Button
+let viewScoresPage = document.getElementById("highscores-page");
+
+viewScoresPage.addEventListener("click", function() {
     startPage.className = 'd-none';
     questionBlock.className = "d-none";
+    highScoreInput.className = "d-none";
     scoresPage.className = "container text-center mt-5";
 })
 
@@ -59,13 +65,15 @@ function setTimer() {
         secondsLeft--;
         timerClock.innerHTML = `Timer: ${secondsLeft}`;
 
-        if (secondsLeft <= 0 || i <= questionsAnswers.length.choices) {
+        if (secondsLeft <= 0 || i >= questionsAnswers.length -1) {
             clearInterval(countdown);
+            clearTimeout(setTimer);
             lastQuestion();
         }
     }, 1000);
 };
 
+resetQA();
 //StartButton
 startButton.addEventListener('click', function() {
     startPage.className = 'd-none';
@@ -74,6 +82,7 @@ startButton.addEventListener('click', function() {
     setTimer();
 });
 
+//Displays Quesitions and Choices to Buttons
 function printQuestionsAnswers() {
     questionH1.textContent = questionsAnswers[i].question;
     buttonA.textContent = questionsAnswers[i].choices[0];
@@ -82,130 +91,157 @@ function printQuestionsAnswers() {
     buttonD.textContent = questionsAnswers[i].choices[3];
 };
 
+//Functions for removing Correct! or Incorrect!
+function correct() {
+    let newP = document.createElement("p");
+    newP.textContent = "Correct!";
+    questionBlock.appendChild(newP);
+    setTimeout(function() {
+       newP.remove();
+    }, 1000)
+}
+
+function incorrect() {
+    let newP = document.createElement("p");
+    newP.textContent = "Incorrect!";
+    questionBlock.appendChild(newP);
+    setTimeout(function() {
+        newP.remove();
+    }, 1000)
+}
+
 // Buttons Click Events
 buttonA.addEventListener('click', function(event) {
     event.stopPropagation();
     let correctChoice = "";
     correctChoice = questionsAnswers[i].answer;
-    console.log(correctChoice);
     if (i < questionsAnswers.length -1) {
         i++
     }
     if (event.target.textContent === correctChoice) {  
         printQuestionsAnswers();
         score++;
-        let newP = document.createElement("p");
-        newP.textContent = "Correct!";
-        questionBlock.appendChild(newP);
+        correct();    
     } else {
         printQuestionsAnswers();
         secondsLeft -= 5;
-        let newP = document.createElement("p");
-        newP.textContent = "Incorrect!";
-        questionBlock.appendChild(newP);
+        incorrect();
     }
-    console.log(score);
-    
 });
 
 buttonB.addEventListener('click', function(event) {
     event.stopPropagation();
     let correctChoice = "";
     correctChoice = questionsAnswers[i].answer;
-    console.log(correctChoice);
     if (i < questionsAnswers.length -1) {
         i++
     }
     if (event.target.textContent === correctChoice) { 
         printQuestionsAnswers();
         score++;
-        let newP = document.createElement("p");
-        newP.textContent = "Correct!";
-        questionBlock.appendChild(newP);
+        correct();
     } else {
         printQuestionsAnswers();
         secondsLeft -= 5;
-        let newP = document.createElement("p");
-        newP.textContent = "Incorrect!";
-        questionBlock.appendChild(newP);
+        incorrect();
     }
-    console.log(score);
 });
 
 buttonC.addEventListener('click', function(event) {
     event.stopPropagation();
     let correctChoice = "";
     correctChoice = questionsAnswers[i].answer;
-    console.log(correctChoice);
     if (i < questionsAnswers.length -1) {
         i++
     }
     if (event.target.textContent === correctChoice) { 
         printQuestionsAnswers();
         score++;
-        let newP = document.createElement("p");
-        newP.textContent = "Correct!";
-        questionBlock.appendChild(newP);
+        correct();
     } else {
         printQuestionsAnswers();
         secondsLeft -= 5;
-        let newP = document.createElement("p");
-        newP.textContent = "Incorrect!";
-        questionBlock.appendChild(newP);
+        incorrect();
     }
-    console.log(score);
 });
 
 buttonD.addEventListener('click', function(event) {
     event.stopPropagation();
     let correctChoice = "";
     correctChoice = questionsAnswers[i].answer;
-    console.log(correctChoice);
     if (i < questionsAnswers.length -1) {
         i++
     }
     if (event.target.textContent === correctChoice) { 
         printQuestionsAnswers(); 
         score++;
-        let newP = document.createElement("p");
-        newP.textContent = "Correct!";
-        questionBlock.appendChild(newP);
+        correct();
     } else {
         printQuestionsAnswers();
         secondsLeft -= 5;
-        let newP = document.createElement("p");
-        newP.textContent = "Incorrect!";
-        questionBlock.appendChild(newP);
+        incorrect();
     }
-    console.log(score); 
 });
 
 //Final Score input
 let finalScore = "";
+let highScoreInput = document.getElementById("high-score-input");
+let yourScore = document.getElementById("your-score");
 
 function lastQuestion() {
     finalScore = secondsLeft + score; 
     questionBlock.className = "d-none";
+    scoresPage.className = "d-none";
+    startPage.className = "d-none";
     highScoreInput.className = "container text-center mt-5";
     yourScore.innerHTML = `Your score is ${finalScore}!`;
 }
 
+//Variables for Scores Page
 let scoresPage = document.getElementById("scores-page");
 let addName = document.getElementById("button-addon2");
 
-// addName.addEventListener("click", pageScores());
-
-localStorage.setItem("score",JSON.stringify(finalScore));
-localStorage.setItem("name", JSON.stringify(yourName));
-function pageScores() {
+//Add name and high scores end of quiz section
+let newLi;
+let ul = document.getElementById("final-ul");
+//Event listener for Add Name Button
+addName.addEventListener("click", function() {
+    let yourName = document.getElementById("your-name").value;
+    localStorage.setItem("score", finalScore);
+    localStorage.setItem("name", yourName);
     highScoreInput.className = "d-none";
     scoresPage.className = "container text-center mt-5";
-    let newLi = document.createElement("li");
-    JSON.parse(localStorage.getItem(finalScore));
-    JSON.parse(localStorage.getItem(yourName));
+    newLi = document.createElement("li");
+    localStorage.getItem(finalScore);
+    localStorage.getItem(yourName);
     newLi.className = "bg-primary text-white"
-    newLi.innerHTML = yourName + finalScore;
-    let ul = document.getElementById("final-ul");
+    newLi.innerHTML = `${yourName} ${finalScore}`;
     ul.appendChild(newLi);
+});
+
+//Go Back Function
+let goBack = document.getElementById('button-go-back');
+goBack.addEventListener('click', function() {
+    scoresPage.className= "d-none"
+    startPage.className = "container text-center mt-5";
+    timerClock.innerHTML = "Timer:"
+    secondsLeft = 75;
+    resetQA();
+})
+
+//Clear High Score
+let clearHighScore = document.getElementById('button-clear-highscore');
+clearHighScore.addEventListener("click", function() {
+    newLi.remove();
+})
+
+//Reset Questions and Answers
+function resetQA() {
+    questionH1.textContent = '';
+    buttonA.textContent = '';
+    buttonB.textContent = '';
+    buttonC.textContent = '';
+    buttonD.textContent = '';
 }
+
 

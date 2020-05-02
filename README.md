@@ -47,4 +47,7 @@ Thank you to Carmen Obied, CJ Pia, and Zack Corpus who helped get me through thi
 ## Project Status
 
 This project is missing some functionality. I could not get the high scores page to show properly with the addEventListener on the Add Name button. There are a few other things that need to be cleaned up like removing the incorrect and correct statements so that don't stay for the length of the quiz.
+```
+Update: Was able to get everything to work. Now need the questions and answers to reset after going through the quiz.
+```
 
