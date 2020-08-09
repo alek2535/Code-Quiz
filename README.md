@@ -26,6 +26,10 @@ THEN I can save my initials and score
 
 ![code quiz](./Assets/04-web-apis-homework-demo.gif) -->
 
+## Deployed Application
+
+[Code Quiz](https://alek2535.github.io/Code-Quiz/)
+
 ## Installation
 
 To access this project:
